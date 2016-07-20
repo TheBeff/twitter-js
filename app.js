@@ -1,6 +1,8 @@
 var express = require( 'express' );
 var swig = require( 'swig');
 var app = express();
+var routes = require('./routes/');
+app.use('/', routes);
 
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
