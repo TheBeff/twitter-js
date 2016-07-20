@@ -1,7 +1,22 @@
 var express = require( 'express' );
+var swig = require( 'swig');
 var app = express();
 
-app.listen(3000);
+app.engine('html', swig.renderFile);
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
+swig.setDefaults({ cache: false });
+
+
+var locals = {
+    title: 'An Example',
+    people: [
+        { name: 'Gandalf'},
+        { name: 'Frodo' },
+        { name: 'Hermione'}
+    ]
+};
+
 
 app.use(function (req, res, next) {
    console.log(req.method + " " + req.originalUrl + " " + res.statusCode);
@@ -14,5 +29,14 @@ app.use('/special/', function (req, res, next) {
 })
 
 app.get('/', function(req, res){
-	res.send("WELCOME, N00B.");
+	res.render('index', locals);
 });
+
+
+app.listen(3000);
+
+
+
+
+
+
