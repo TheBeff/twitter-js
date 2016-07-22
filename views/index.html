@@ -13,11 +13,29 @@
     </div>
     <div class="col-md-9">
     
+    {% if showForm %}
+  <form action="/tweets" method="POST">
+    <label for="name_field">Name:</label>
+    <input name="name" type="text" id="name_field"  value="{{name}}"/>
+
+    <label for="text_field">Text:</label>
+    <input name="content" type="text" id="text_field" style="width: 350px;" />
+
+    <input type="submit" value="Submit" />
+  </form>
+  {% endif %}
+
+    <ul class="list-unstyled">
       <!-- display tweets here -->
       {% for tweet in tweets %}
+      <div class="tweetbox">
+        
+        <li><img src="http://www.fillmurray.com/48/48"><strong><a href="/users/{{tweet.name}}">{{tweet.name}}</a></strong></li>
         <li>{{tweet.content}}</li>
+        <li><a href=''>Re-Tweet</a></li>
+      </div>
       {% endfor %}
-      
+    </ul>  
     </div>
   </div>
     
